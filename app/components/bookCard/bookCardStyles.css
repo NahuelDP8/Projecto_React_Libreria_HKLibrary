@@ -1,3 +1,16 @@
 .bookCardWidth{
-    width: 18rem;
+    width: 18rem;    
+}
+
+.bg-authors{
+    background-color: #44BE85;
+}
+
+.bg-genres{
+    background-color: #BE447D;
+}
+
+.tag{
+    padding: .2rem;
+    font-size: .75rem;
 }
