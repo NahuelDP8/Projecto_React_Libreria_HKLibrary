@@ -14,12 +14,12 @@ function CriteriaDropdown(){
     }
 
     return(
-        <div className='bg-secondary rounded-right'>
+        <div className='criteriaSelector border border-light p-1'>
             <div className='text-white'>Buscar por</div>
-            <DropdownButton title={criteria} variant="secondary">
+            <DropdownButton title={criteria} variant="dark text-white border-0">
                 <Dropdown.Item onClick={() => handleItemClick("Titulo")}>Titulo</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleItemClick("Autor")}>Autor</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleItemClick("Genero")}>Genero</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleItemClick("Autores")}>Autores</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleItemClick("Generos")}>Generos</Dropdown.Item>
             </DropdownButton>
         </div>
     );
@@ -33,7 +33,7 @@ export default function SearchBarCatalog(){
 
 
     return(
-        <Form className="d-flex mb-3 searchBar m-auto">
+        <Form className="d-flex mb-3 m-auto">
             <CriteriaDropdown/>
             <Form.Control
                 type="search"
@@ -41,7 +41,7 @@ export default function SearchBarCatalog(){
                 className="m-0 rounded-0"
                 aria-label="Search"
             />
-            <Button variant="secondary" className='searchButton' onClick={handleClick}>Buscar</Button>
+            <Button variant="dark border border-light" className='searchButton' onClick={handleClick}>Buscar</Button>
         </Form>
     );
 }
