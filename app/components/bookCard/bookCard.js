@@ -25,7 +25,7 @@ function GenresList({genres}){
 
 export default function BookCard({book}){
     return (
-        <Card className='bookCardWidth bg-light' >
+        <Card className='bookCard bg-light' >
             <Card.Img variant="top" className='bg-white' src={book.url_imagen} />
             <Card.Body className='d-flex flex-column justify-content-between'>
                 <Card.Title className='text-start fs-4'>{book.titulo}</Card.Title>
@@ -35,7 +35,7 @@ export default function BookCard({book}){
                 
                 <div className='d-flex justify-content-between align-items-center'>
                     <div>${book.precio}</div>
-                    <Button variant="primary">Inspeccionar</Button>
+                    <Button href="#" variant="primary">Inspeccionar</Button>
                 </div>
             </Card.Body>
         </Card>

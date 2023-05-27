@@ -1,5 +1,13 @@
-.bookCardWidth{
-    width: 18rem;    
+.bookCard{
+    width: 18rem;  
+    transform: translate(0, 0);
+    transition: all .2s;
+}
+
+.bookCard:hover{
+    box-shadow: 10px 10px 20px grey;
+    transform: translate(-5px, -5px);
+    transition: all .2s;
 }
 
 .bg-authors{
