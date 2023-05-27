@@ -15,7 +15,7 @@ function CriteriaDropdown(){
 
     return(
         <div className='criteriaSelector border border-light p-1'>
-            <div className='text-white'>Buscar por</div>
+            <div className='text-white text-nowrap'>Buscar por</div>
             <DropdownButton title={criteria} variant="dark text-white border-0">
                 <Dropdown.Item onClick={() => handleItemClick("Titulo")}>Titulo</Dropdown.Item>
                 <Dropdown.Item onClick={() => handleItemClick("Autores")}>Autores</Dropdown.Item>
