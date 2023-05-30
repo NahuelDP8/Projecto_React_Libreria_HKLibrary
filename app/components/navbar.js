@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {ShoppingCart} from "phosphor-react";
+import Link from 'next/link';
 
 export default function NavbarApp(){
     return (
@@ -22,14 +23,21 @@ export default function NavbarApp(){
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="catalog">Libros</Nav.Link>
+            <Link href="catalog">Libros</Link>
             <NavDropdown title="Explorar" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="genres">Generos</NavDropdown.Item>
-              <NavDropdown.Item href="authors">
-                Autores
+              <NavDropdown.Item>
+                <Link href="genres">
+                  Generos
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link href="authors">
+                  Autores
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link  href="cart"><ShoppingCart/></Nav.Link>
+            <Link  href="cart"><ShoppingCart/></Link>
+            <Link href="paginaPrueba">PRUEBA</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
