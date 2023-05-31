@@ -11,7 +11,7 @@ import './navbarStyles.css'
 //TODO borrar la pagina prueba
 export default function NavbarApp(){
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-3'>
         	<Container className='ps-4 p-0 m-0'>
               	<Navbar.Brand>
                     

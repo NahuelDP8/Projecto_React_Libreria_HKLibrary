@@ -5,7 +5,7 @@ export const BOOKS_CART = [
     "precio": "342124.84",
     "cantidad_paginas": 515,
     "disponibilidad": true,
-    "url_imagen": "https://pzwiki.net/w/images/a/ac/SkillBookAnim_120px.gif",
+    "url_imagen": "https://image.placeholder.co/insecure/w:384/aHR0cHM6Ly9jZG4uc3BhY2VyLnByb3BlcnRpZXMvMGE5NzU1YjAtYmIzMi00MzJhLWJmMmUtYzQ3ZWFjNGJkNDFm",
     "autores": [
         {
         "id": 172,
@@ -40,7 +40,7 @@ export const BOOKS_CART = [
     "precio": "71918.76",
     "cantidad_paginas": 427,
     "disponibilidad": true,
-    "url_imagen": "https://pzwiki.net/w/images/a/ac/SkillBookAnim_120px.gif",
+    "url_imagen": "https://cms-cdn.placeholder.co/warehouse_for_rent_19b6e42cf3.jpg?width=1920",
     "autores": [
         {
         "id": 164,
