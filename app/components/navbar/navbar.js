@@ -11,10 +11,9 @@ import './navbarStyles.css'
 //TODO borrar la pagina prueba
 export default function NavbarApp(){
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-3'>
-        	<Container className='ps-4 p-0 m-0'>
+        <Navbar collapseOnSelect sticky="top" expand="lg" bg="dark" variant="dark" className='mb-3 p-0'>
+        	<Container fluid className='px-4 my-2 p-0 m-0'>
               	<Navbar.Brand>
-                    
                   	<Link className='link' href="home">
 						<img
 							src="images\logoBookShop.png"
