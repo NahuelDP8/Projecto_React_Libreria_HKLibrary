@@ -6,7 +6,7 @@ import { AuthrosList, GenresList } from './lists';
 
 export default function BookCard({book, onShow}){
     return (
-        <Card className='bookCard' >
+        <Card onClick={onShow} className='bookCard' >
             <Card.Img variant="top" className='' src={book.url_imagen} />
             <Card.Body className='d-flex flex-column justify-content-between cardBody'>
                 <Card.Title className='text-start text-white fs-4'>{book.titulo}</Card.Title>

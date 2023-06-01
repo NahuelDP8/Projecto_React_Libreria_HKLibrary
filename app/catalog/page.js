@@ -5,7 +5,7 @@ import { BOOKS } from "../data/dummyData";
 import SearchBarCatalog from "../components/searchBar/searchBarCatalog";
 
 export default function Catalog(){
-
+    
     //Manejar estado y realizar pedidos correspondientes a la API
     const libros = BOOKS;
 

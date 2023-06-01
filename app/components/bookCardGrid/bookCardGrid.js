@@ -17,7 +17,7 @@ export default function BookCardGrid({books}){
                 setBookShown(data)
             });
         
-        console.log("Apretaste libro "+id);
+        console.log(bookShown);
         setShowModal(true);
     }
 
