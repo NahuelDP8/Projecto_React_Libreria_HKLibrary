@@ -2,28 +2,9 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './bookCardStyles.css';
+import { AuthrosList, GenresList } from './lists';
 
-function AuthrosList({authors}){
-    return (
-        <div className='d-flex flex-wrap text-center align-items-center gap-1 mb-2'>
-            {authors.map( author => (
-                <div key={author.id} className='tag bg-authors badge'>{author.nombre}, {author.apellido}</div>
-            ))}
-        </div>
-    );
-}
-
-function GenresList({genres}){
-    return (
-        <div className='d-flex flex-wrap text-center align-items-center gap-1 mb-2'>
-            {genres.map( genre => (
-                <div key={genre.id} className='tag bg-genres badge'>{genre.nombre_genero}</div>
-            ))}
-        </div>
-    );
-}
-
-export default function BookCard({book}){
+export default function BookCard({book, onShow}){
     return (
         <Card className='bookCard' >
             <Card.Img variant="top" className='' src={book.url_imagen} />
@@ -35,7 +16,7 @@ export default function BookCard({book}){
                 
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='text-white'>${book.precio}</div>
-                    <Button href="#" variant="primary">Inspeccionar</Button>
+                    <Button href="#" variant="primary" onClick={onShow}>Inspeccionar</Button>
                 </div>
             </Card.Body>
         </Card>

@@ -29,8 +29,11 @@ function GenresList({genres}){
 function BookShow(props) {
   return (
     <Modal
-      {...props}
+      show={props.show}
+      onHide={props.onHide}
       aria-labelledby="contained-modal-title-vcenter"
+      size="lg"
+      fullscreen="sm-down"
       centered
     >
       <Modal.Header closeButton>
