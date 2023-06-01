@@ -1,13 +1,24 @@
 class HKLibraryAPI{
     constructor(){
-        this.baseUrl = 'https://pixel-pioneers-laravel-git-etapa2-pixel-pioneer.vercel.app/rest/v1/libros/1';
+        this.baseUrl = 'https://pixel-pioneers-laravel-git-etapa2-pixel-pioneer.vercel.app/rest/v1';
     }
     
 
-    async getLibros() {
-        const response = await fetch(this.baseUrl) // Reemplaza la URL con la URL de tu API
+    async getBooks() {
+        const END_POINT = "/libros/";
+        const response = await fetch(this.baseUrl+END_POINT);
         const data = await response.json();
-        return data;
+        const strJson = JSON.stringify(data)
+
+        return strJson;
+    }
+
+    async getBook(id){
+        const END_POINT = "/libros/";
+        const response = await fetch(this.baseUrl+END_POINT+id);
+        const data = await response.json();
+
+        return data.data;
     }
 }
 

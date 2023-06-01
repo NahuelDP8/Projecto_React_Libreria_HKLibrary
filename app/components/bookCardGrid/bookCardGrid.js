@@ -4,14 +4,19 @@ import BookCard from "../bookCard/bookCard";
 import BookShow from '../bookCard/bookShow';
 import { useState } from 'react';
 import { SINGLEBOOK, EMPTYBOOK } from '../../data/dummyBook';
+import HKLibraryAPI from "@/app/api/HKLibraryApi";
 
 export default function BookCardGrid({books}){
     const [showModal, setShowModal] = useState(false);
     const [bookShown, setBookShown] = useState(EMPTYBOOK);
 
     function showBookInfo(id){
-        //Buscar en API
-        setBookShown(SINGLEBOOK);
+        const api = new HKLibraryAPI();
+        api.getBook(id)
+            .then(data => {
+                setBookShown(data)
+            });
+        
         console.log("Apretaste libro "+id);
 
         setShowModal(true);

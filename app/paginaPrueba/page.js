@@ -7,8 +7,9 @@ export default function PaginaPrueba(){
     const [data, setData] = useState(null);
     useEffect(() => {
         const api = new HKLibraryAPI();
-        const data = api.getLibros();
-        setData(data);
+        api.getBook(2)
+            .then(data => console.log(data));
+
         console.log(data);
     }, [])
 
