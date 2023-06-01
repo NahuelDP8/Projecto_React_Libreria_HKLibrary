@@ -45,48 +45,4 @@ export const SINGLEBOOK={
 }
 
 
-export const EMPTYBOOK={
-  "id": 8,
-  "titulo": "",
-  "precio": "",
-  "cantidad_paginas": 0,
-  "disponibilidad": true,
-  "url_imagen": "",
-  "autores": [
-    {
-      "id": 196,
-      "nombre": "",
-      "apellido": ""
-    },
-    {
-      "id": 173,
-      "nombre": "",
-      "apellido": ""
-    },
-    {
-      "id": 113,
-      "nombre": "",
-      "apellido": ""
-    },
-    {
-      "id": 179,
-      "nombre": "",
-      "apellido": ""
-    }
-  ],
-  "generos": [
-    {
-      "id": 2,
-      "nombre_genero": ""
-    },
-    {
-      "id": 11,
-      "nombre_genero": ""
-    },
-    {
-      "id": 15,
-      "nombre_genero": ""
-    }
-  ],
-  "descripcion": ""
-}
+

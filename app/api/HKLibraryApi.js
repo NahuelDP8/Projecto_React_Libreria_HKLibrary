@@ -8,9 +8,8 @@ class HKLibraryAPI{
         const END_POINT = "/libros/";
         const response = await fetch(this.baseUrl+END_POINT);
         const data = await response.json();
-        const strJson = JSON.stringify(data)
 
-        return strJson;
+        return data.data;
     }
 
     async getBook(id){
