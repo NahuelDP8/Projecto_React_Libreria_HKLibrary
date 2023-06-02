@@ -17,6 +17,41 @@ class HKLibraryAPI{
 
         return data.data;
     }
+    
+    async getBooksByTitle(title) {
+        const END_POINT = "/libros/"+title+"/searchTitle";
+        const response = await fetch(this.baseUrl+END_POINT);
+        const data = await response.json();
+        let result = [];
+        if(data.data){
+            result = data.data;
+        }
+        return result;
+    }
+
+    async getBooksByAuthor(author) {
+        const END_POINT = "/libros/"+author+"/searchAuthor";
+        const response = await fetch(this.baseUrl+END_POINT);
+        const data = await response.json();
+        let result = [];
+        if(data.data){
+            result = data.data;
+        }
+        return result;
+    }
+
+    async getBooksByGenre(genre) {
+        const END_POINT = "/libros/"+genre+"/searchGenre";
+        const response = await fetch(this.baseUrl+END_POINT);
+        const data = await response.json();
+        let result = [];
+        if(data.data){
+            result = data.data;
+        }
+        return result;
+    }
+
+
 
     async getBook(id){
         const END_POINT = "/libros/";

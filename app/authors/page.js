@@ -7,6 +7,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 
 export default function Authors(){
     const [authors, setAuthors] = useState([]);
+    
     function showAuthors(){
         const api = new HKLibraryAPI();
         api.getAuthors() 
