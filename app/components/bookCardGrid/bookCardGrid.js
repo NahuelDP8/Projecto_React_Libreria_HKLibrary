@@ -12,12 +12,11 @@ export default function BookCardGrid({books}){
 
     function showBookInfo(id){
         const api = new HKLibraryAPI();
-        api.getBook(id) //TODO Cambiarlo a id
+        api.getBook(id)
             .then(data => {
                 setBookShown(data)
-            });
-        
-        console.log(bookShown);
+            })
+    
         setShowModal(true);
     }
 
