@@ -11,6 +11,10 @@ export default class LocalRepository{
         return JSON.parse(cart);
     }
 
+    storeCart(cart){
+        localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
+    }
+
     addBookToCart(bookToStore){
         let cart = this.getCart();
         let book = cart.find( book => {
