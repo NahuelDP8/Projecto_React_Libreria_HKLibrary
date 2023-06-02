@@ -3,6 +3,9 @@
 import { Container, Card, Button, Row, Col, Form, FormControl } from "react-bootstrap";
 import { BOOKS_CART } from "../data/dummyCart";
 import "./cartStyles.css"
+import { useEffect, useState } from "react";
+import LocalRepository from "../services/LocalRepository";
+import HKLibraryAPI from "../services/HKLibraryApi";
 
 function CartRow({book}){
     return(
@@ -38,19 +41,38 @@ function CartRow({book}){
 
 
 export default function Cart(){
-    
-    const books = BOOKS_CART;
+
+    //const init = [];
+    const init = BOOKS_CART;
+    const [booksCart, setBooksCart] = useState(init);
+
+    useEffect(()=>{
+        const storage = new LocalRepository();
+        const api = new HKLibraryAPI();
+        const cart = storage.getCart();
+
+        setBooksCart(cart);
+    },[]);
+
+    // function calculateTotal(){
+    //     const bookPriceAmount = booksCart.map(book => {
+    //         return [book.]
+    //     });
+        
+    // }
+
 
     return (
         <Container className="shopping-cart">
             <Card>
                 <Card.Title className="text-center fs-1">Pedido</Card.Title>
                 <Card.Body>
-                    {books.map(book => <CartRow book={book}/>)}
+                    {booksCart.map(book => <CartRow key={book.id} book={book}/>)}
                     <hr/>
-                    <div className="d-flex justify-content-between bg-warning p-2 rounded">
-                        <div>TOTAL</div>
-                        <div>$99999.99</div>
+                    <div className="d-flex justify-content-between align-items-center bg-warning p-2 rounded">
+                        <div className="me-auto">TOTAL</div>
+                        <div>${99999.99}</div>
+                        <Button variant="success" className="ms-1">Comprar</Button>
                     </div>
                 </Card.Body>
             </Card>

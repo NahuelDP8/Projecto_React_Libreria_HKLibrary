@@ -3,7 +3,7 @@
 import { useEffect,useState } from "react";
 import { Container } from "react-bootstrap";
 import ButtonExplorer from "../components/explorer/explorer";
-import HKLibraryAPI from "@/app/api/HKLibraryApi";
+import HKLibraryAPI from "@/app/services/HKLibraryApi";
 
 export default function Authors(){
     const [authors, setAuthors] = useState([]);

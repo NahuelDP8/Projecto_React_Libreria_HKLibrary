@@ -5,9 +5,17 @@ import "./bookCardStyles.css"
 import Image from 'react-bootstrap/Image';
 import { AuthrosList, GenresList } from './lists';
 import { EMPTYBOOK } from '../../data/Models';
+import LocalRepository from '@/app/services/LocalRepository';
 
 export default function BookShow(props) {
   const BOOK_NOT_FOUND_MESSAGE = "No se ha podido recuperar la información del libro";
+
+  function buyBook(bookID){
+    props.onHide();
+
+    const storage = new LocalRepository();
+    storage.addBookToCart(bookID);
+  }
 
   return (
     <Modal
@@ -38,7 +46,7 @@ export default function BookShow(props) {
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-between'>
             <div className='text-start'>${props.book.precio}</div>
-            <Button onClick={props.onHide}>Comprar</Button>
+            <Button onClick={() => buyBook(props.book.id)}>Comprar</Button>
           </Modal.Footer>
         </>
       ) : (

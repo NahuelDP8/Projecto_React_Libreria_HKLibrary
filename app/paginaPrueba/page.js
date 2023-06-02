@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import HKLibraryAPI from "../api/HKLibraryApi";
+import HKLibraryAPI from "../services/HKLibraryApi";
 
 export default function PaginaPrueba(){
 
