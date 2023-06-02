@@ -3,7 +3,7 @@
 import BookCard from "../bookCard/bookCard";
 import BookShow from '../bookCard/bookShow';
 import { useState } from 'react';
-import { EMPTYBOOK } from '../../data/Models';
+import { EMPTYBOOK, INITIAL_BOOK } from '../../data/Models';
 import HKLibraryAPI from "@/app/api/HKLibraryApi";
 
 export default function BookCardGrid({books}){
@@ -14,10 +14,9 @@ export default function BookCardGrid({books}){
         const api = new HKLibraryAPI();
         api.getBook(id)
             .then(data => {
-                setBookShown(data)
+                setBookShown(data);
+                setShowModal(true);
             })
-    
-        setShowModal(true);
     }
 
     return(

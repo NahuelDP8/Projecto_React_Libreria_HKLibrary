@@ -25,9 +25,9 @@ class HKLibraryAPI{
                 return response.json();
             })
             .then( data => {
-                let result = data;
-                if(data.error){
-                   result = EMPTYBOOK; 
+                let result = EMPTYBOOK;
+                if(data.data){
+                    result = data.data;
                 }
                 return result;
             });

@@ -16,7 +16,7 @@ export default function BookCard({book, onShow}){
                 
                 <div className='d-flex justify-content-between align-items-center'>
                     <div className='text-white'>${book.precio}</div>
-                    <Button href="#" variant="primary" onClick={onShow}>Inspeccionar</Button>
+                    <Button href="#" variant="primary" onClick={ e => {e.stopPropagation(), onShow()}}>Inspeccionar</Button>
                 </div>
             </Card.Body>
         </Card>
