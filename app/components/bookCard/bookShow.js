@@ -10,11 +10,22 @@ import LocalRepository from '@/app/services/LocalRepository';
 export default function BookShow(props) {
   const BOOK_NOT_FOUND_MESSAGE = "No se ha podido recuperar la información del libro";
 
-  function buyBook(bookID){
+  function reduceBook(book){
+    return {
+      "id":book.id,
+      "titulo":book.titulo,
+      "url_imagen":book.url_imagen,
+      "precio":book.precio,
+    }
+  }
+
+  function buyBook(bookBought){
     props.onHide();
 
+    const cartBook = reduceBook(bookBought);
+
     const storage = new LocalRepository();
-    storage.addBookToCart(bookID);
+    storage.addBookToCart(cartBook);
   }
 
   return (
@@ -46,7 +57,7 @@ export default function BookShow(props) {
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-between'>
             <div className='text-start'>${props.book.precio}</div>
-            <Button onClick={() => buyBook(props.book.id)}>Comprar</Button>
+            <Button onClick={() => buyBook(props.book)}>Comprar</Button>
           </Modal.Footer>
         </>
       ) : (

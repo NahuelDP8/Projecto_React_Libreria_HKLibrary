@@ -11,17 +11,13 @@ export default class LocalRepository{
         return JSON.parse(cart);
     }
 
-    addBookToCart(bookID){
+    addBookToCart(bookToStore){
         let cart = this.getCart();
         let book = cart.find( book => {
-            return book.id == bookID;
-            
+            return book.id == bookToStore.id;
         });
         if(book==null){
-            const newBook = {
-                "id": bookID,
-                "cantidad": 1
-            }
+            const newBook = {...bookToStore, cantidad:1};
             cart.push(newBook);
         }else{
             book.cantidad++;

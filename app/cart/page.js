@@ -22,7 +22,7 @@ function CartRow({book}){
                     <Col xs={12} sm={6} md={3} lg={2} className="d-flex flex-row justify-content-center align-items-center">
                         <Button className="minusBtn">-</Button>
                         <Form>
-                            <Form.Control className="my-auto px-2 rounded rounded-0" defaultValue={6}/>
+                            <Form.Control className="my-auto px-2 rounded rounded-0" defaultValue={book.cantidad}/>
                         </Form>
                         <Button className="plusBtn">+</Button>
                     </Col>
@@ -41,10 +41,7 @@ function CartRow({book}){
 
 
 export default function Cart(){
-
-    //const init = [];
-    const init = BOOKS_CART;
-    const [booksCart, setBooksCart] = useState(init);
+    const [booksCart, setBooksCart] = useState([]);
 
     useEffect(()=>{
         const storage = new LocalRepository();
@@ -53,14 +50,6 @@ export default function Cart(){
 
         setBooksCart(cart);
     },[]);
-
-    // function calculateTotal(){
-    //     const bookPriceAmount = booksCart.map(book => {
-    //         return [book.]
-    //     });
-        
-    // }
-
 
     return (
         <Container className="shopping-cart">
