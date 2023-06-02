@@ -10,7 +10,7 @@ import LocalRepository from '@/app/services/LocalRepository';
 export default function BookShow(props) {
   const BOOK_NOT_FOUND_MESSAGE = "No se ha podido recuperar la información del libro";
 
-  function reduceBook(book){
+  function reduceBookInfo(book){
     return {
       "id":book.id,
       "titulo":book.titulo,
@@ -21,9 +21,7 @@ export default function BookShow(props) {
 
   function buyBook(bookBought){
     props.onHide();
-
-    const cartBook = reduceBook(bookBought);
-
+    const cartBook = reduceBookInfo(bookBought);
     const storage = new LocalRepository();
     storage.addBookToCart(cartBook);
   }
