@@ -6,16 +6,21 @@ import { useEffect, useState } from "react";
 import LocalRepository from "../services/LocalRepository";
 import CartRow from "./cartRow";
 import PurchaseForm from "./buyForm";
+import HKLibraryAPI from "../services/HKLibraryApi";
 
 export default function Cart(){
-    const [booksCart, setBooksCart] = useState([]);
-    const [formShow, setFormShow] = useState(false);
-    const [client, setClient] = useState({
+    const EMPTY_CLIENT = {
         nombre:"",
         apellido:"",
         mail:"",
         direccion:""
-    });
+    }
+    const EMPTY_CART = [];
+
+    const [booksCart, setBooksCart] = useState(EMPTY_CART);
+    const [formShow, setFormShow] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [client, setClient] = useState(EMPTY_CLIENT);
 
     useEffect(()=>{
         const storage = new LocalRepository();
@@ -100,8 +105,6 @@ export default function Cart(){
     }
 
     function confirmPurchase(){
-        console.log(client);
-        console.log(booksCart);
 
         if(booksCart.length > 0){
             const formattedCart = booksCart.map( product => {
@@ -116,12 +119,24 @@ export default function Cart(){
                 libros:formattedCart
             }
 
-            console.log(purchaseData);
+            const api = new HKLibraryAPI();
+            api.makePurchase(purchaseData)
+                .then( data => {
+                    if(data.message){
+                        setErrorMessage(data.message);
+                    }
+                    if(data.data){
+                        console.log(data.data);
+                        const storage = new LocalRepository();
+                        storage.clearCart();
 
-            //Llamar a la api con los datos
-            //borrar pedido del local storage
-            //esconder el modal
-            //resetear el cliente
+                        setFormShow(false);
+                        setClient(EMPTY_CLIENT);
+                        setBooksCart(EMPTY_CART);
+                    }
+
+                });
+            
         }
     }
 
@@ -153,6 +168,7 @@ export default function Cart(){
                 onConfirmPurchase={() => confirmPurchase()}
                 clientData={client}
                 updateClientData={setClient}
+                errorMessage={errorMessage}
             >
 
             </PurchaseForm>

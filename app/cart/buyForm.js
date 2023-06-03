@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 
-export default function PurchaseForm({show, onHide, onConfirmPurchase, clientData, updateClientData}) {
+export default function PurchaseForm({show, onHide, onConfirmPurchase, clientData, updateClientData, errorMessage}) {
 
     function mailChange(mailValue){
         const newClientData = {...clientData, mail:mailValue};
@@ -45,19 +45,20 @@ export default function PurchaseForm({show, onHide, onConfirmPurchase, clientDat
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control type="text" onChange={(e) => nameChange(e.target.value)}/>
+                        <Form.Control onChange={(e) => nameChange(e.target.value)}/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Apellido</Form.Label>
-                        <Form.Control type="text" onChange={(e) => lastnameChange(e.target.value)}/>
+                        <Form.Control onChange={(e) => lastnameChange(e.target.value)}/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Dirección</Form.Label>
-                        <Form.Control type="text" onChange={(e) => addressChange(e.target.value)}/>
+                        <Form.Control onChange={(e) => addressChange(e.target.value)}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
+                <div className='text-danger'>{errorMessage}</div>
                 <Button onClick={onHide} variant="danger">Cancelar</Button>
                 <Button onClick={onConfirmPurchase} variant="success">Confirmar</Button>
             </Modal.Footer>

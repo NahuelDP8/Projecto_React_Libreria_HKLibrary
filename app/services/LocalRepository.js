@@ -29,4 +29,8 @@ export default class LocalRepository{
 
         localStorage.setItem(this.CART_KEY, JSON.stringify(cart));
     }
+
+    clearCart(){
+        localStorage.removeItem(this.CART_KEY);
+    }
 }

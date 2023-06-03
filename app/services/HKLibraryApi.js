@@ -101,6 +101,27 @@ class HKLibraryAPI{
     
         return data.data;
     }
+
+    //Retorna un json con "message" con el mensaje de error, o "data" con los datos de la compra.
+    async makePurchase(purchaseData){
+        const END_POINT = "/pedidos";
+
+        const message = {
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify(purchaseData)
+        }
+
+        return fetch(this.baseUrl+END_POINT, message)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                return data;
+            });
+    }
 }
 
 export default HKLibraryAPI;
