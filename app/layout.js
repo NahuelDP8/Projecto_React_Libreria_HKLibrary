@@ -1,4 +1,4 @@
-'use client';
+
 import { Inter } from 'next/font/google'
 import NavbarApp from './components/navbar/navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
