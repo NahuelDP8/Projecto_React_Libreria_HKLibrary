@@ -1,9 +1,8 @@
-
-import { Inter } from 'next/font/google'
-import NavbarApp from './components/navbar/navbar'
+'use client';
+import { Inter } from 'next/font/google';
+import NavbarApp from './components/navbar/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'app/css/globalStyles.css'
-import React, { createContext, useState } from 'react';
+import 'app/css/globalStyles.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
