@@ -126,7 +126,6 @@ export default function Cart(){
                         setErrorMessage(data.message);
                     }
                     if(data.data){
-                        console.log(data.data);
                         const storage = new LocalRepository();
                         storage.clearCart();
 
