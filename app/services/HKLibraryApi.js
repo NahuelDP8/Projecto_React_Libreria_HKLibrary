@@ -109,13 +109,16 @@ class HKLibraryAPI{
         const message = {
             method: "POST",
             headers:{
+                "Accept": "application/json",
                 "Content-Type":"application/json",
             },
             body:JSON.stringify(purchaseData)
         }
 
+        console.log("fetch");
         return fetch(this.baseUrl+END_POINT, message)
             .then(response => {
+                console.log(response);
                 return response.json();
             })
             .then(data => {
