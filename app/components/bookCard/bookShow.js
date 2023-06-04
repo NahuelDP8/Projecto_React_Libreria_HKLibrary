@@ -59,7 +59,7 @@ export default function BookShow(props) {
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-between'>
             <div className='text-start'>${props.book.precio}</div>
-            <Button onClick={() => buyBook(props.book)}>Comprar</Button>
+            <Button onClick={() => buyBook(props.book)}>Agregar al Carrito</Button>
           </Modal.Footer>
         </>
       ) : (
