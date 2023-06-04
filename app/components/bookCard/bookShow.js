@@ -49,7 +49,7 @@ export default function BookShow(props) {
                 <Image className='modalImg m-auto' src={props.book.url_imagen} />
               </div>
             
-              <div className='flex-grow-1 descriptionContainer'>
+              <div className='descriptionContainer'>
                     {props.book.descripcion}
               </div>
               <div>Cantidad Paginas: {props.book.cantidad_paginas}</div>

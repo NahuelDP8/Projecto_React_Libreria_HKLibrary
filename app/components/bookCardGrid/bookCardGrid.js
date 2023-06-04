@@ -5,6 +5,8 @@ import BookShow from '../bookCard/bookShow';
 import { useState } from 'react';
 import HKLibraryAPI from "@/app/services/HKLibraryApi";
 
+export const BOOKS_NOT_FOUND = "books_not_found";
+
 export default function BookCardGrid({books}){
     const EMPTYBOOK={}
     const [showModal, setShowModal] = useState(false);
@@ -23,7 +25,7 @@ export default function BookCardGrid({books}){
     return(
         <>
             <div className="d-flex flex-wrap justify-content-center gap-3">       
-                {(books.length > 0) ? (
+                {(books != BOOKS_NOT_FOUND) ? (
                     books.map( book => 
                         <BookCard 
                             key={book.id} 
