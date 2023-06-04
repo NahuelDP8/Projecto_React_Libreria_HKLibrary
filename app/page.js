@@ -1,11 +1,10 @@
 'use client';
-import Image from 'next/image'
+import './css/globalStyles.css';
+import Home from './home/page';
 
 
 export default function Libros() {
   return (
-    <h1>
-      Page description
-    </h1>
+    <Home></Home>
   )
 }
