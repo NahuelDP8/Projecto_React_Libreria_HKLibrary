@@ -16,14 +16,25 @@ export default function BookCardGrid({books}){
             .then(data => {
                 setBookShown(data);
                 setShowModal(true);
-            })
+            })    
+        
     }
 
     return(
         <>
             <div className="d-flex flex-wrap justify-content-center gap-3">       
                 {(books.length > 0) ? (
-                    books.map( book => <BookCard key={book.id} book={book} onShow={()=>showBookInfo(book.id)}/>)
+                    books.map( book => 
+                        <BookCard 
+                            key={book.id} 
+                            book={book} 
+                            onShow={()=>{
+                                if(book.disponibilidad){
+                                    showBookInfo(book.id)
+                                }
+                            }}>
+                        </BookCard>
+                    )
                 ) : (
                     <h3>No se encontraron libros</h3>
                 )}

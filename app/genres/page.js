@@ -3,7 +3,7 @@
 import { useEffect,useState } from "react";
 import HKLibraryAPI from "@/app/services/HKLibraryApi";
 import { Content } from "next/font/google";
-import ButtonExplorer from "../components/explorer/explorer";
+import ButtonExplorer from "../components/explorer/ButtonGrid";
 import { Container } from "react-bootstrap";
 
 export default function Genres(){
