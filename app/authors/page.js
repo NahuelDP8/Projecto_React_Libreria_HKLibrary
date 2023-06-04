@@ -55,7 +55,7 @@ export default function Authors(){
                 </ExplorerButtonGrid>
             ):(
                 <ExplorerBookGrid books={authorBooks} onClickBackBtn={() => backToBtnGrid()}>
-                    <h1>Libros de {authorName} </h1>
+                    <h1>Libros escritos por {authorName} </h1>
                 </ExplorerBookGrid>
             )}
         </>

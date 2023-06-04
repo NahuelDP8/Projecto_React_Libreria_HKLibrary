@@ -8,13 +8,13 @@ export default function ExplorerBookGrid({books, onClickBackBtn, children}){
     return (
         <Container className="text-center">
             <Row>
-                <Col xs={2}>
+                <Col xs={12} sm={2}>
                     <Button onClick={onClickBackBtn}><ArrowLeft size={32} weight="bold" /></Button>
                 </Col>
-                <Col>
+                <Col xs={12} sm={8}>
                     {children}
                 </Col>
-                <Col xs={2}>
+                <Col xs={12} sm={2}>
                 </Col>
             </Row>
             <Row>
