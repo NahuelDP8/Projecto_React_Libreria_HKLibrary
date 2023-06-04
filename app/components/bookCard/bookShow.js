@@ -4,11 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import "./bookCardStyles.css"
 import Image from 'react-bootstrap/Image';
 import { AuthrosList, GenresList } from './lists';
-import { EMPTYBOOK } from '../../data/Models';
 import LocalRepository from '@/app/services/LocalRepository';
 
 export default function BookShow(props) {
   const BOOK_NOT_FOUND_MESSAGE = "No se ha podido recuperar la información del libro";
+  const EMPTYBOOK={};
 
   function reduceBookInfo(book){
     return {

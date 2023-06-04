@@ -66,7 +66,6 @@ export default function Catalog(){
     return <Container className="text-center">
         <h1>CATALOGO</h1>
         <SearchBarCatalog updateBooks={updateBooks} searchText={updateSearchText} updateCriteria={updateCriteria} titleCriteria={criteria} />
-        {console.log(books)}
         <BookCardGrid books={books} />
     </Container>
 }

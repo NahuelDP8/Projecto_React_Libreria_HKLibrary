@@ -12,7 +12,6 @@ export default function Genres(){
         const api = new HKLibraryAPI();
         api.getGenres() 
             .then(data => {
-                console.log(data +" data");
                 const genres = data.map(genre => {
                     return {
                       id: genre.id,

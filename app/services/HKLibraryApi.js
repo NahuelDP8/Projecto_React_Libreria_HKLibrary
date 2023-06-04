@@ -1,9 +1,3 @@
-import { EMPTYBOOK } from "../data/Models";
-
-//Error constanst
-export const ERROR_404 = "404";
-export const ERROR_422 = "422"; 
-
 class HKLibraryAPI{
     constructor(){
         this.baseUrl = 'https://pixel-pioneers-laravel-git-etapa2-pixel-pioneer.vercel.app/rest/v1';
@@ -55,6 +49,7 @@ class HKLibraryAPI{
 
     async getBook(id){
         const END_POINT = "/libros/";
+        const EMPTYBOOK={};
         const resultFetch = fetch(this.baseUrl+END_POINT+id)
             .then(response => {
                 return response.json();
@@ -115,10 +110,8 @@ class HKLibraryAPI{
             body:JSON.stringify(purchaseData)
         }
 
-        console.log("fetch");
         return fetch(this.baseUrl+END_POINT, message)
             .then(response => {
-                console.log(response);
                 return response.json();
             })
             .then(data => {
