@@ -1,7 +1,7 @@
 'use client';
 
 import { Container, Image, Row } from "react-bootstrap";
-
+import './homeStyles.css';
 
 export default function Home() {
   return (
