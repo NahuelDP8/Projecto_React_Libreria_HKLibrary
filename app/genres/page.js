@@ -5,6 +5,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 
 import ExplorerBookGrid from "../components/explorer/ExplorerBookGrid";
 import ExplorerButtonGrid from "../components/explorer/ExplorerButtonGrid";
+import { BOOKS_NOT_FOUND } from "../components/bookCardGrid/bookCardGrid";
 
 export default function Genres(){
     const [genres, setGenres] = useState([]);
@@ -12,11 +13,19 @@ export default function Genres(){
     const [genreBooks, setGenreBooks] = useState([]);
     const [genreName, setGenreName] = useState("");
 
+    function placeBooksInGrid(fetchedBooks){
+        if(fetchedBooks.length>0){
+            setGenreBooks(fetchedBooks);
+        }else{
+            setGenreBooks(BOOKS_NOT_FOUND);
+        }
+    }
+
     function searchBooksFromGenre(id){
         const api = new HKLibraryAPI();
         api.getGenre(id)
             .then( data => {
-                setGenreBooks(data.libros);
+                placeBooksInGrid(data.libros);
                 setGenreName(data.nombre_genero);
             });
             setShowBtnGrid(false)

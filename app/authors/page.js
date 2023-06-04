@@ -5,6 +5,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 
 import ExplorerBookGrid from "../components/explorer/ExplorerBookGrid";
 import ExplorerButtonGrid from "../components/explorer/ExplorerButtonGrid";
+import { BOOKS_NOT_FOUND } from "../components/bookCardGrid/bookCardGrid";
 
 export default function Authors(){
     const [authors, setAuthors] = useState([]);
@@ -12,11 +13,19 @@ export default function Authors(){
     const [authorBooks, setAuthorBooks] = useState([]);
     const [authorName, setAuthorName] = useState("");
 
+    function placeBooksInGrid(fetchedBooks){
+        if(fetchedBooks.length>0){
+            setAuthorBooks(fetchedBooks);
+        }else{
+            setAuthorBooks(BOOKS_NOT_FOUND);
+        }
+    }
+
     function searchBooksFromAuthor(id){
         const api = new HKLibraryAPI();
         api.getAuthor(id)
             .then( data => {
-                setAuthorBooks(data.libros);
+                placeBooksInGrid(data.libros);
                 setAuthorName(data.nombre+" "+data.apellido);
             });
         setShowBtnGrid(false);
