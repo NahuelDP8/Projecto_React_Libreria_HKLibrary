@@ -5,6 +5,7 @@ import "./bookCardStyles.css"
 import Image from 'react-bootstrap/Image';
 import { AuthrosList, GenresList } from './lists';
 import LocalRepository from '@/app/services/LocalRepository';
+import { Container, Row } from 'react-bootstrap';
 
 export default function BookShow(props) {
   const BOOK_NOT_FOUND_MESSAGE = "No se ha podido recuperar la información del libro";
@@ -43,15 +44,18 @@ export default function BookShow(props) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body >
-            <div className='text-center'><Image className='text-center' src={props.book.url_imagen} /></div>
+            <div className='d-flex flex-column'>
+              <div className='text-center'>
+                <Image className='modalImg m-auto' src={props.book.url_imagen} />
+              </div>
             
-              <div style={{ maxHeight: '300px', overflowY: 'scroll' }}>
+              <div className='flex-grow-1 descriptionContainer'>
                     {props.book.descripcion}
               </div>
               <div>Cantidad Paginas: {props.book.cantidad_paginas}</div>
-              <GenresList genres={props.book.generos}/>
-              <AuthrosList authors={props.book.autores}/>
-              
+              <div><GenresList genres={props.book.generos}/></div>
+              <div><AuthrosList authors={props.book.autores}/></div>
+            </div>
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-between'>
             <div className='text-start'>${props.book.precio}</div>

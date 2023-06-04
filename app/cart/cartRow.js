@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Card, Button, Row, Col, Form, FormControl } from "react-bootstrap";
+import { Container, Card, Button, Row, Col, Form } from "react-bootstrap";
 import "./cartStyles.css";
 
 export default function CartRow({book, addOneBook, removeOneBook, onChangeAmount, onRemoveBook}){

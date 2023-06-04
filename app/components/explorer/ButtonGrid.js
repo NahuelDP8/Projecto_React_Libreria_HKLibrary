@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function ButtonExplorer({infoButtons, onShowBookGrid}){
     return(

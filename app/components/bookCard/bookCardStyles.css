@@ -24,3 +24,13 @@
     padding: .2rem;
     font-size: .75rem;
 }
+
+.modalImg{
+    max-height: 10rem;
+    max-width: 10rem;
+}
+
+.descriptionContainer{
+    height: 15rem;
+    overflow-y: scroll;
+}

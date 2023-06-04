@@ -5,7 +5,6 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 import { Container } from "react-bootstrap";
 import BookCardGrid from "../components/bookCardGrid/bookCardGrid";
 import SearchBarCatalog from "../components/searchBar/searchBarCatalog";
-import { Autour_One } from "next/font/google";
 
 export default function Catalog(){
     const [books, setBooks] = useState([]);

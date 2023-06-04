@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Card, Button, Row, Col, Form, FormControl } from "react-bootstrap";
+import { Container, Card, Button } from "react-bootstrap";
 import "./cartStyles.css"
 import { useEffect, useState } from "react";
 import LocalRepository from "../services/LocalRepository";
