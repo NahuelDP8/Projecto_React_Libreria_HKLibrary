@@ -24,4 +24,17 @@ export default class ApiAuthenticator{
             })
         });
     }
+
+    loginClient(clientCredentials){
+        const END_POINT="/login";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return this.axiosInstance.get(this.BASE_URL+this.SANCTUM_COOKIE).then( response => {
+            return this.axiosInstance.post(url, clientCredentials).then( response => {
+                return response;
+            }).catch(error => {
+                throw error;
+            })
+        });
+    }
 }

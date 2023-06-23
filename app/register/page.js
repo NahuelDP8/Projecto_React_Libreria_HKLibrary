@@ -4,6 +4,7 @@ import { Button, Container, Form, Card, Row, Col } from "react-bootstrap";
 import './registerStyles.css';
 import ApiAuthenticator from "../services/ApiAuthenticator";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function registerForm(){
 
@@ -16,9 +17,9 @@ export default function registerForm(){
         "password_confirmation":"",
     });
 
-    const [errorMessages, setErrorMessages] = useState({
+    const [errorMessages, setErrorMessages] = useState({});
 
-    });
+    const router = useRouter();
 
     function updateFormData(e){
         setFormData(previousState => ({...previousState, [e.target.name]: e.target.value}));
@@ -27,7 +28,7 @@ export default function registerForm(){
     function registerClient(){
         const authenticator = new ApiAuthenticator();
         authenticator.registerClient(formData).then(response => {
-            console.log(response);
+            router.push('/catalog');
         }).catch(error => {
             setErrorMessages(error.response.data.data);
         });
