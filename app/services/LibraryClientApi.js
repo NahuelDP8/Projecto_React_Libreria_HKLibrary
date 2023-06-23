@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class ApiAuthenticator{
+export default class LibraryClientApi{
     constructor(){
         this.BASE_URL="http://localhost:8000";
         this.API_URL_BASE="/rest/v1";
@@ -35,6 +35,19 @@ export default class ApiAuthenticator{
             }).catch(error => {
                 throw error;
             })
+        });
+    }
+
+    getClientOrders(){
+        const END_POINT="/client/pedidos";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return this.axiosInstance.get(this.BASE_URL+this.SANCTUM_COOKIE).then( response => {
+            return this.axiosInstance.get(url).then( response => {
+                return response;
+            });
+        }).catch(error => {
+            throw error;
         });
     }
 }

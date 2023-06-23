@@ -2,11 +2,11 @@
 
 import { Button, Container, Form, Card, Row, Col } from "react-bootstrap";
 import './registerStyles.css';
-import ApiAuthenticator from "../services/ApiAuthenticator";
+import LibraryClientApi from "../services/LibraryClientApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function registerForm(){
+export default function RegisterForm(){
 
     const [formData, setFormData] = useState({
         "name":"",
@@ -26,7 +26,7 @@ export default function registerForm(){
     }
 
     function registerClient(){
-        const authenticator = new ApiAuthenticator();
+        const authenticator = new LibraryClientApi();
         authenticator.registerClient(formData).then(response => {
             router.push('/catalog');
         }).catch(error => {

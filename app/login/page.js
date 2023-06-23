@@ -4,9 +4,9 @@ import { Button, Container, Form, Card, Row, Col } from "react-bootstrap";
 import './loginStyles.css';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import ApiAuthenticator from "../services/ApiAuthenticator";
+import LibraryClientApi from "../services/LibraryClientApi";
 
-export default function loginForm(){
+export default function LoginForm(){
 
     const EMPTY_FORM = {
         "email":"",
@@ -33,9 +33,9 @@ export default function loginForm(){
     }
 
     function loginClient(){
-        const authenticator = new ApiAuthenticator();
+        const authenticator = new LibraryClientApi();
         authenticator.loginClient(formData).then( response => {
-            router.push('/catalog');
+            router.back();
         }).catch( error => {
             setErrorMessages(error.response.data.message);
         });
