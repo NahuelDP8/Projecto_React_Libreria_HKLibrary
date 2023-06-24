@@ -7,6 +7,7 @@ import LocalRepository from "../services/LocalRepository";
 import CartRow from "./cartRow";
 import { useRouter } from "next/navigation";
 import LibraryClientApi from "../services/LibraryClientApi";
+import AuthCookieManager from "../services/AuthCookieManager";
 
 export default function Cart(){
     const EMPTY_CLIENT = {
@@ -138,8 +139,10 @@ export default function Cart(){
                     setErrorMessage(error.response.data.message);
                     setDisableBuyButton(false);
                 }else if(error.response.status === 419 || error.response.status === 401){
+                    const cookieManager = new AuthCookieManager();
+                    cookieManager.deleteAuthCookie();
+
                     router.push('/login');
-                
                 }else{
                     setErrorMessage(error.response.data.message);
                     setDisableBuyButton(false);

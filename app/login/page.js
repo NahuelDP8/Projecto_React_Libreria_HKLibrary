@@ -5,6 +5,7 @@ import './loginStyles.css';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LibraryClientApi from "../services/LibraryClientApi";
+import AuthCookieManager from "../services/AuthCookieManager";
 
 export default function LoginForm(){
 
@@ -35,6 +36,11 @@ export default function LoginForm(){
     function loginClient(){
         const authenticator = new LibraryClientApi();
         authenticator.loginClient(formData).then( response => {
+            const client = response.data.data.client;
+            const clientName = client.nombre +" "+ client.apellido;
+            const cookieManager = new AuthCookieManager();
+            cookieManager.setAuthCookie(clientName);
+
             router.back();
         }).catch( error => {
             setErrorMessages(error.response.data.message);

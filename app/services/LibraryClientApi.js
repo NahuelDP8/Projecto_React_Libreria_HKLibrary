@@ -60,4 +60,15 @@ export default class LibraryClientApi{
             throw error;
         });
     }
+
+    logoutClient(){
+        const END_POINT="/logout";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return this.axiosInstance.post(url).then( response => {
+            return response;
+        }).catch( error => {
+            throw error;
+        });
+    }
 }

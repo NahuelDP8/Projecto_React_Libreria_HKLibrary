@@ -5,6 +5,7 @@ import './registerStyles.css';
 import LibraryClientApi from "../services/LibraryClientApi";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import AuthCookieManager from "../services/AuthCookieManager";
 
 export default function RegisterForm(){
 
@@ -28,6 +29,11 @@ export default function RegisterForm(){
     function registerClient(){
         const authenticator = new LibraryClientApi();
         authenticator.registerClient(formData).then(response => {
+            const client = response.data.data.client;
+            const clientName = client.nombre +" "+ client.apellido;
+            const cookieManager = new AuthCookieManager();
+            cookieManager.setAuthCookie(clientName);
+
             router.push('/catalog');
         }).catch(error => {
             setErrorMessages(error.response.data.data);
