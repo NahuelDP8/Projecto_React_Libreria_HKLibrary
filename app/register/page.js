@@ -29,6 +29,7 @@ export default function RegisterForm(){
     function registerClient(){
         const authenticator = new LibraryClientApi();
         authenticator.registerClient(formData).then(response => {
+            console.log(response);
             const client = response.data.data.client;
             const clientName = client.nombre +" "+ client.apellido;
             const cookieManager = new AuthCookieManager();
