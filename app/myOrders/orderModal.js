@@ -20,12 +20,16 @@ export default function OrderModal({order, show, handleClose}){
                     <Col className='fw-bold text-center'>Cantidad</Col>
                     <Col className='fw-bold text-end'>Precio Unitario</Col>
                 </Row>
-                {order.libros.map( libro =>
-                    <Row>
-                        <Col>{libro.titulo}</Col>
-                        <Col className='text-center'>{libro.cantidad_unidades}</Col>
-                        <Col className='text-end'>${libro.precio_unitario}</Col>
-                    </Row>
+                {(order.libros)?(
+                    order.libros.map( libro =>
+                        <Row key={libro.id}>
+                            <Col>{libro.titulo}</Col>
+                            <Col className='text-center'>{libro.cantidad_unidades}</Col>
+                            <Col className='text-end'>${libro.precio_unitario}</Col>
+                        </Row>
+                    )
+                ):(
+                    <Row>Vacio</Row>
                 )}
             </Modal.Body>
             <Modal.Footer className='d-flex justify-content-between'>

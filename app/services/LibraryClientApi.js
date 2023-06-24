@@ -42,11 +42,21 @@ export default class LibraryClientApi{
         const END_POINT="/client/pedidos";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
 
-        return this.axiosInstance.get(this.BASE_URL+this.SANCTUM_COOKIE).then( response => {
-            return this.axiosInstance.get(url).then( response => {
-                return response;
-            });
-        }).catch(error => {
+        return this.axiosInstance.get(url).then( response => {
+            return response;
+        }).catch( error => {
+            throw error;
+        });
+        
+    }
+
+    buyOrder(orderData){
+        const END_POINT="/pedidos";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return this.axiosInstance.post(url, orderData).then( response => {
+            return response;
+        }).catch( error => {
             throw error;
         });
     }
