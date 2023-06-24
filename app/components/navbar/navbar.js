@@ -28,7 +28,7 @@ export default function NavbarApp(){
 	function logoutClient(){
 		const cookieManager = new AuthCookieManager();
 		const clientApi = new LibraryClientApi();
-		
+
 		clientApi.logoutClient().then( response => {
 			console.log(response);
 			cookieManager.deleteAuthCookie();
@@ -44,7 +44,7 @@ export default function NavbarApp(){
 		if(clientAuthenticated){
 			return (
 				<>
-					<div className='fw-bolder'>{clientName}</div>
+					<div className='fw-bolder nav-link'>{clientName}</div>
 					<Link href="myOrders" className='nav-link'>Mis Pedidos</Link>
 					<Link href="#" className='nav-link' onClick={logoutClient}>Cerrar Sesión</Link>
 				</>

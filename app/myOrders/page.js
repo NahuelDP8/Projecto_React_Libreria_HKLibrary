@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import OrderModal from "./orderModal";
 import OrdersList from "./orderList";
 import AuthCookieManager from "../services/AuthCookieManager";
+import { CustomH1, CustomH3 } from "../components/utils/utils";
 
 export default function ClientOrders(){
     const EMPTY_MESSAGE = "";
@@ -52,10 +53,10 @@ export default function ClientOrders(){
     return (
         <>
             <Container>
-                <h1 className="text-center">Mis Pedidos</h1>
+                <CustomH1>Mis Pedidos</CustomH1>
                 <OrdersList clientOrders={clientOrders} showOrderPopup={handleShowModal}></OrdersList>
                 {(noOrdersMessage == NO_ORDERS_FOUND_MESSAGE)?(
-                    <h3 className="text-center">{NO_ORDERS_FOUND_MESSAGE}</h3>
+                    <CustomH3>{NO_ORDERS_FOUND_MESSAGE}</CustomH3>
                 ):(
                     null
                 )}

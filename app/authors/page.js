@@ -6,6 +6,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 import ExplorerBookGrid from "../components/explorer/ExplorerBookGrid";
 import ExplorerButtonGrid from "../components/explorer/ExplorerButtonGrid";
 import { BOOKS_NOT_FOUND } from "../components/bookCardGrid/bookCardGrid";
+import { CustomH1 } from "../components/utils/utils";
 
 export default function Authors(){
     const [authors, setAuthors] = useState([]);
@@ -58,11 +59,11 @@ export default function Authors(){
         <>
             {(showBtnGrid)?(
                 <ExplorerButtonGrid infoForButtons={authors} searchBooks={searchBooksFromAuthor}>
-                    <h1>Autores</h1>
+                    <CustomH1>Autores</CustomH1>
                 </ExplorerButtonGrid>
             ):(
                 <ExplorerBookGrid books={authorBooks} onClickBackBtn={() => backToBtnGrid()}>
-                    <h1>Libros escritos por {authorName} </h1>
+                    <CustomH1>Libros escritos por {authorName} </CustomH1>
                 </ExplorerBookGrid>
             )}
         </>
