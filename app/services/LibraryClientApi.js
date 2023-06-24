@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class LibraryClientApi{
     constructor(){
-        this.BASE_URL="http://localhost:8000";
+        this.BASE_URL="https://pixel-pioneers-laravel-git-authentication-pixel-pioneer.vercel.app";
         this.API_URL_BASE="/rest/v1";
         this.SANCTUM_COOKIE="/sanctum/csrf-cookie";
 
