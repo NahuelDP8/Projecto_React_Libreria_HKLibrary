@@ -26,15 +26,11 @@ export default function NavbarApp(){
 	}
 
 	function logoutClient(){
-		const cookieManager = new AuthCookieManager();
 		const clientApi = new LibraryClientApi();
 
 		clientApi.logoutClient().then( response => {
-			console.log(response);
-			cookieManager.deleteAuthCookie();
 			setIsClientAuth(false);
 		}).catch( error => {
-			console.log(error);
 		});
 	}
 

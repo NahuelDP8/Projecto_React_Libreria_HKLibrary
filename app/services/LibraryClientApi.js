@@ -1,27 +1,40 @@
 import axios from "axios";
+import LocalRepository from "./LocalRepository";
+import AuthCookieManager from "./AuthCookieManager";
 
 export default class LibraryClientApi{
     constructor(){
-        this.BASE_URL="https://pixel-pioneers-laravel-git-authentication-pixel-pioneer.vercel.app";
+        this.BASE_URL="http://localhost:8000";
         this.API_URL_BASE="/rest/v1";
-        this.SANCTUM_COOKIE="/sanctum/csrf-cookie";
 
-        this.axiosInstance = axios.create({
-            baseURL: this.BASE_URL,
-            withCredentials: true,
-        });
+        this.localRepository = new LocalRepository();
+    }
+
+    getAuthHeader(){
+        const token = this.localRepository.getBearerToken();
+        return {
+            headers:{
+                'Authorization': 'Bearer '+token
+            }
+        }
     }
 
     registerClient(clientData){
         const END_POINT = "/register";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
 
-        return this.axiosInstance.get(this.BASE_URL+this.SANCTUM_COOKIE).then( response =>{
-            return this.axiosInstance.post(url, clientData).then( response => {
-                return response;
-            }).catch(error => {
-                throw error;
-            })
+        return axios.post(url, clientData).then( response => {
+            const token = response.data.data.token;
+            this.localRepository.storeBearerToken(token);
+
+            const client = response.data.data.client;
+            const clientName = client.nombre +" "+ client.apellido;
+            const cookieManager = new AuthCookieManager();
+            cookieManager.setAuthCookie(clientName);
+
+            return response;
+        }).catch(error => {
+            throw error;
         });
     }
 
@@ -29,20 +42,26 @@ export default class LibraryClientApi{
         const END_POINT="/login";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
 
-        return this.axiosInstance.get(this.BASE_URL+this.SANCTUM_COOKIE).then( response => {
-            return this.axiosInstance.post(url, clientCredentials).then( response => {
-                return response;
-            }).catch(error => {
-                throw error;
-            })
-        });
+        return axios.post(url, clientCredentials).then( response => {
+            const token = response.data.data.token;
+            this.localRepository.storeBearerToken(token);
+
+            const client = response.data.data.client;
+            const clientName = client.nombre +" "+ client.apellido;
+            const cookieManager = new AuthCookieManager();
+            cookieManager.setAuthCookie(clientName);
+
+            return response;
+        }).catch(error => {
+            throw error;
+        })
     }
 
     getClientOrders(){
         const END_POINT="/client/pedidos";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
 
-        return this.axiosInstance.get(url).then( response => {
+        return axios.get(url, this.getAuthHeader()).then( response => {
             return response;
         }).catch( error => {
             throw error;
@@ -54,7 +73,7 @@ export default class LibraryClientApi{
         const END_POINT="/pedidos";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
 
-        return this.axiosInstance.post(url, orderData).then( response => {
+        return axios.post(url, orderData, this.getAuthHeader()).then( response => {
             return response;
         }).catch( error => {
             throw error;
@@ -64,8 +83,14 @@ export default class LibraryClientApi{
     logoutClient(){
         const END_POINT="/logout";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+        
+        return axios.post(url, null, this.getAuthHeader()).then( response => {
+            const cookieManager = new AuthCookieManager();
+            cookieManager.deleteAuthCookie();
 
-        return this.axiosInstance.post(url).then( response => {
+            const localRepository = new LocalRepository();
+            localRepository.deleteBearerToken();
+
             return response;
         }).catch( error => {
             throw error;

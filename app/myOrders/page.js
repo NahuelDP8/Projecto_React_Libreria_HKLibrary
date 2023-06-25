@@ -37,7 +37,6 @@ export default function ClientOrders(){
                 setNoOrdersMessage(NO_ORDERS_FOUND_MESSAGE);
             }
         }).catch( error => {
-            console.log(error);
             if(error.response.status === 401){
                 const cookieManager = new AuthCookieManager();
                 cookieManager.deleteAuthCookie();

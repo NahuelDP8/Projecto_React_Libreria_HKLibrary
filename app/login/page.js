@@ -36,11 +36,6 @@ export default function LoginForm(){
     function loginClient(){
         const authenticator = new LibraryClientApi();
         authenticator.loginClient(formData).then( response => {
-            const client = response.data.data.client;
-            const clientName = client.nombre +" "+ client.apellido;
-            const cookieManager = new AuthCookieManager();
-            cookieManager.setAuthCookie(clientName);
-
             router.back();
         }).catch( error => {
             setErrorMessages(error.response.data.message);

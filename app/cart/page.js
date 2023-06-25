@@ -123,18 +123,14 @@ export default function Cart(){
                 libros:formattedCart
             }
 
-            console.log(purchaseData);
-
             const clientApi = new LibraryClientApi();
             clientApi.buyOrder(purchaseData).then( response => {
-                console.log(response);
                 const storage = new LocalRepository();
                 storage.clearCart();
 
                 setErrorMessage("");
                 setBooksCart(EMPTY_CART);
             }).catch( error => {
-                console.log(error);
                 if(error.response.status === 422){
                     setErrorMessage(error.response.data.message);
                     setDisableBuyButton(false);
@@ -154,7 +150,7 @@ export default function Cart(){
     return (
         <Container className="shopping-cart">
             <Card>
-                <Card.Title className="text-center fs-1">Pedido</Card.Title>
+                <Card.Title className="text-center fs-1 mt-3 mb-0">Pedido</Card.Title>
                 <Card.Body>
                     {booksCart.map(book => 
                         <CartRow 

@@ -4,8 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
 export default function OrderModal({order, show, handleClose}){
-    console.log(order);
-
     return (
         <Modal show={show} onHide={handleClose} centered fullscreen="sm-down">
             <Modal.Header closeButton>
