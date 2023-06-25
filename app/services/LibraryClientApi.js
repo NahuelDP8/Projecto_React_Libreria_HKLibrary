@@ -4,7 +4,7 @@ import AuthCookieManager from "./AuthCookieManager";
 
 export default class LibraryClientApi{
     constructor(){
-        this.BASE_URL="http://localhost:8000";
+        this.BASE_URL="https://pixel-pioneers-laravel-git-authentication-pixel-pioneer.vercel.app";
         this.API_URL_BASE="/rest/v1";
 
         this.localRepository = new LocalRepository();
@@ -83,7 +83,7 @@ export default class LibraryClientApi{
     logoutClient(){
         const END_POINT="/logout";
         const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
-        
+
         return axios.post(url, null, this.getAuthHeader()).then( response => {
             const cookieManager = new AuthCookieManager();
             cookieManager.deleteAuthCookie();
