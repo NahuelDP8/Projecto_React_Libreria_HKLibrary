@@ -6,6 +6,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 import ExplorerBookGrid from "../components/explorer/ExplorerBookGrid";
 import ExplorerButtonGrid from "../components/explorer/ExplorerButtonGrid";
 import { BOOKS_NOT_FOUND } from "../components/bookCardGrid/bookCardGrid";
+import { CustomH1 } from "../components/utils/utils";
 
 export default function Genres(){
     const [genres, setGenres] = useState([]);
@@ -56,11 +57,11 @@ export default function Genres(){
         <>
             {(showBtnGrid)?(
                 <ExplorerButtonGrid infoForButtons={genres} searchBooks={searchBooksFromGenre}>
-                    <h1>Generos</h1>
+                    <CustomH1>Generos</CustomH1>
                 </ExplorerButtonGrid>
             ):(
                 <ExplorerBookGrid books={genreBooks} onClickBackBtn={() => backToBtnGrid()}>
-                    <h1>Libros del género {genreName} </h1>
+                    <CustomH1>Libros del género {genreName} </CustomH1>
                 </ExplorerBookGrid>
             )}
         </>

@@ -5,8 +5,9 @@ import "./cartStyles.css"
 import { useEffect, useState } from "react";
 import LocalRepository from "../services/LocalRepository";
 import CartRow from "./cartRow";
-import PurchaseForm from "./buyForm";
-import HKLibraryAPI from "../services/HKLibraryApi";
+import { useRouter } from "next/navigation";
+import LibraryClientApi from "../services/LibraryClientApi";
+import AuthCookieManager from "../services/AuthCookieManager";
 
 export default function Cart(){
     const EMPTY_CLIENT = {
@@ -17,15 +18,18 @@ export default function Cart(){
     }
     const EMPTY_CART = [];
 
+    const router = useRouter();
     const [booksCart, setBooksCart] = useState(EMPTY_CART);
-    const [formShow, setFormShow] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [client, setClient] = useState(EMPTY_CLIENT);
+    const [disableBuyButton, setDisableBuyButton] = useState(true);
 
     useEffect(()=>{
         const storage = new LocalRepository();
         const cart = storage.getCart();
 
+        if(cart.length > 0){
+            setDisableBuyButton(false);
+        }
         setBooksCart(cart);
     },[]);
 
@@ -105,8 +109,9 @@ export default function Cart(){
     }
 
     function confirmPurchase(){
-
         if(booksCart.length > 0){
+            setDisableBuyButton(true);
+            setErrorMessage("");
             const formattedCart = booksCart.map( product => {
                 return {
                     id:product.id,
@@ -115,34 +120,37 @@ export default function Cart(){
             });
 
             const purchaseData = {
-                cliente:client,
                 libros:formattedCart
             }
 
-            const api = new HKLibraryAPI();
-            api.makePurchase(purchaseData)
-                .then( data => {
-                    if(data.message){
-                        setErrorMessage(data.message);
-                    }
-                    if(data.data){
-                        const storage = new LocalRepository();
-                        storage.clearCart();
+            const clientApi = new LibraryClientApi();
+            clientApi.buyOrder(purchaseData).then( response => {
+                const storage = new LocalRepository();
+                storage.clearCart();
 
-                        setFormShow(false);
-                        setClient(EMPTY_CLIENT);
-                        setBooksCart(EMPTY_CART);
-                    }
+                setErrorMessage("");
+                setBooksCart(EMPTY_CART);
+            }).catch( error => {
+                if(error.response.status === 422){
+                    setErrorMessage(error.response.data.message);
+                    setDisableBuyButton(false);
+                }else if(error.response.status === 419 || error.response.status === 401){
+                    const cookieManager = new AuthCookieManager();
+                    cookieManager.deleteAuthCookie();
 
-                });
-            
+                    router.push('/login');
+                }else{
+                    setErrorMessage(error.response.data.message);
+                    setDisableBuyButton(false);
+                }
+            });
         }
     }
 
     return (
         <Container className="shopping-cart">
             <Card>
-                <Card.Title className="text-center fs-1">Pedido</Card.Title>
+                <Card.Title className="text-center fs-1 mt-3 mb-0">Pedido</Card.Title>
                 <Card.Body>
                     {booksCart.map(book => 
                         <CartRow 
@@ -154,23 +162,15 @@ export default function Cart(){
                             onRemoveBook={() => removeBook(book.id)}
                         />)}
                     <hr/>
+                    <div className="text-danger">{errorMessage}</div>
                     <div className="d-flex justify-content-between align-items-center bg-warning p-2 rounded">
                         <div className="me-auto">TOTAL</div>
                         <div>${calculateTotal()}</div>
-                        <Button variant="success" className="ms-1" onClick={() => setFormShow(true)} disabled={booksCart.length <= 0}>Comprar</Button>
+                        <Button variant="success" className="ms-1" onClick={() => confirmPurchase()} disabled={disableBuyButton}>Comprar</Button>
                     </div>
+                    
                 </Card.Body>
             </Card>
-            <PurchaseForm
-                show={formShow}
-                onHide={() => setFormShow(false)}
-                onConfirmPurchase={() => confirmPurchase()}
-                clientData={client}
-                updateClientData={setClient}
-                errorMessage={errorMessage}
-            >
-
-            </PurchaseForm>
         </Container>
     );
 }
