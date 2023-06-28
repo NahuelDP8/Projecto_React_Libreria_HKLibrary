@@ -4,7 +4,7 @@ import AuthCookieManager from "./AuthCookieManager";
 
 export default class LibraryClientApi{
     constructor(){
-        this.BASE_URL="https://pixel-pioneers-laravel-git-authentication-pixel-pioneer.vercel.app";
+        this.BASE_URL="https://pixel-pioneers-laravel-git-entregapromocion-pixel-pioneer.vercel.app";
         this.API_URL_BASE="/rest/v1";
 
         this.localRepository = new LocalRepository();
