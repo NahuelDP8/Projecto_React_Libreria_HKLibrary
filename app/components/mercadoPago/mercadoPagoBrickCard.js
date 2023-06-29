@@ -8,7 +8,16 @@ import LocalRepository from '@/app/services/LocalRepository';
 
 initMercadoPago('TEST-3a2a4180-ed34-4c24-bce6-65c02cacbc2d');
 
-export function PaymentForm ({ totalPrice, realizarCompra,show,handleClose,librosCompra }){
+export function PaymentForm ({ 
+  totalPrice,
+  show,
+  handleClose,
+  librosCompra,
+  resetCart, 
+  handle422Error,
+  handleAuthError,
+  handleOtherErrors
+}){
     const initialization = {
         amount: totalPrice,
        };
@@ -33,25 +42,14 @@ export function PaymentForm ({ totalPrice, realizarCompra,show,handleClose,libro
         console.log(purchaseData);
          const clientApi = new LibraryClientApi();
          clientApi.buyOrder(purchaseData).then( response => {
-             const storage = new LocalRepository();
-             storage.clearCart();
-
+            resetCart();
         }).catch( error => {
-            console.log(error);
             if(error.response.status === 422){
-                console.log("422");
-                // setErrorMessage(error.response.data.message);
-                // setDisableBuyButton(false);
+                handle422Error();
             }else if(error.response.status === 419 || error.response.status === 401){
-              console.log("419");
-                // const cookieManager = new AuthCookieManager();
-                // cookieManager.deleteAuthCookie();
-
-                // router.push('/login');
+                handleAuthError();
             }else{
-              console.log("else");
-                // setErrorMessage(error.response.data.message);
-                // setDisableBuyButton(false);
+                handleOtherErrors();
             }
         });
     

@@ -110,83 +110,35 @@ export default function Cart(){
         }
     }
 
-    const handleRealizarCompra = (pagoSuccess) => {
-        if(pagoSuccess){
-          const fecha_compra = obtenerFechaActual();
-          const juegosComprados = cart.map((juego) => {
-          const idJuego = juego.id;
-          const precioDelMomento = juego.precio
-          return { idJuego, precioDelMomento };
-          });
-          const compra = {fecha_compra, juegosComprados}
-          const compraApi = new Log_Reg_Buy_Usuarios();
-            compraApi.comprar(compra).then((response) => {
-            console.log('Compra realizada:', response.data);
-            setCompraRealizada(true);
-            setShowPayment(false);
-            clearCart();
-            setTimeout(() => {
-              setShow(false);
-              setCompraRealizada(false); // Restablecer el estado después de un tiempo determinado
-            }, 8000)
-          }).catch((error) => {
-            console.error('Error al realizar la compra:', error);
-          });
-        }else{
-          setShowToast(true);
-          setShowPayment(false);
-          setTimeout(() => {
-            setShowToast(false); // Restablecer el estado después de un tiempo determinado
-          }, 8000)
-        }
-        
-      };
-
-
-    function confirmPurchase(){
-        console.log("asd");
-        if(booksCart.length > 0){
-            setDisableBuyButton(true);
-            setErrorMessage("");
-            const formattedCart = booksCart.map( product => {
-                return {
-                    id:product.id,
-                    cantidad:product.cantidad
-                }
-            });
-
-            const purchaseData = {
-                libros:formattedCart
-            }
-
-            const clientApi = new LibraryClientApi();
-            clientApi.buyOrder(purchaseData).then( response => {
-                const storage = new LocalRepository();
-                storage.clearCart();
-
-                setErrorMessage("");
-                setBooksCart(EMPTY_CART);
-            }).catch( error => {
-                if(error.response.status === 422){
-                    setErrorMessage(error.response.data.message);
-                    setDisableBuyButton(false);
-                }else if(error.response.status === 419 || error.response.status === 401){
-                    const cookieManager = new AuthCookieManager();
-                    cookieManager.deleteAuthCookie();
-
-                    router.push('/login');
-                }else{
-                    setErrorMessage(error.response.data.message);
-                    setDisableBuyButton(false);
-                }
-            });
-        }
-    }
     function closeMPModal(){
         setShowMPModal(false);
-        window.cardPaymentBrickController.unmount();
-        
+        window.cardPaymentBrickController.unmount(); 
     }
+
+    function resetCart(){
+        const storage = new LocalRepository();
+        storage.clearCart();
+        setErrorMessage("");
+        setBooksCart(EMPTY_CART);
+    }
+
+    function handle422Error(){
+        setErrorMessage(error.response.data.message);
+        setDisableBuyButton(false);
+    }
+
+    function handleAuthError(){
+        const cookieManager = new AuthCookieManager();
+        cookieManager.deleteAuthCookie();
+
+        router.push('/login');
+    }
+
+    function handleOtherErrors(){
+        setErrorMessage(error.response.data.message);
+        setDisableBuyButton(false);
+    }
+
     return (
         <Container className="shopping-cart">
             <Card>
@@ -209,10 +161,13 @@ export default function Cart(){
                         <Button variant="success" className="ms-1" onClick={() => setShowMPModal(true)} disabled={disableBuyButton}>Comprar</Button>
                         <PaymentForm 
                             totalPrice = {calculateTotal()}
-                            realizarCompra = {handleRealizarCompra}
                             show={showMPModal}
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
+                            resetCart={resetCart}
+                            handle422Error={handle422Error}
+                            handleAuthError={handleAuthError}
+                            handleOtherErrors={handleOtherErrors}
                         />
                     </div>
                     
