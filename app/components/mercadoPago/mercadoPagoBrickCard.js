@@ -34,17 +34,18 @@ export function PaymentForm ({ totalPrice, realizarCompra,show,handleClose,libro
              storage.clearCart();
 
         }).catch( error => {
+            console.log(error);
             if(error.response.status === 422){
-                setErrorMessage(error.response.data.message);
-                setDisableBuyButton(false);
+                // setErrorMessage(error.response.data.message);
+                // setDisableBuyButton(false);
             }else if(error.response.status === 419 || error.response.status === 401){
-                const cookieManager = new AuthCookieManager();
-                cookieManager.deleteAuthCookie();
+                // const cookieManager = new AuthCookieManager();
+                // cookieManager.deleteAuthCookie();
 
-                router.push('/login');
+                // router.push('/login');
             }else{
-                setErrorMessage(error.response.data.message);
-                setDisableBuyButton(false);
+                // setErrorMessage(error.response.data.message);
+                // setDisableBuyButton(false);
             }
         });
     

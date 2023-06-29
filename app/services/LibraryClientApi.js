@@ -98,8 +98,7 @@ export default class LibraryClientApi{
         return axios.post(url, orderData, this.getAuthHeader()).then( response => {
             return response;
         }).catch( error => {
-            console.log(error);
-            //throw error;
+            throw error;
         });
     }
     async mercadoPago(formData){
