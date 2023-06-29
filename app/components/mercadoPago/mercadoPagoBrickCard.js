@@ -43,6 +43,7 @@ export function PaymentForm ({
          const clientApi = new LibraryClientApi();
          clientApi.buyOrder(purchaseData).then( response => {
             resetCart();
+            handleClose();
         }).catch( error => {
             if(error.response.status === 422){
                 handle422Error();
