@@ -14,7 +14,7 @@ export function PaymentForm ({
   librosCompra
 }){
   const initialization = {
-    amount: totalPrice,
+    //amount: totalPrice,
   };
 
 
