@@ -115,6 +115,13 @@ export default function Cart(){
         window.cardPaymentBrickController.unmount(); 
     }
 
+    function resetCart(){
+        const storage = new LocalRepository();
+        storage.clearCart();
+        setErrorMessage("");
+        setBooksCart(EMPTY_CART);
+    }
+
     return (
         <Container className="shopping-cart">
             <Card>
@@ -140,6 +147,7 @@ export default function Cart(){
                             show={showMPModal}
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
+                            deleteCart={resetCart}
                         />
                     </div>
                     

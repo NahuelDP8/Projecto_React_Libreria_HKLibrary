@@ -11,7 +11,8 @@ export function PaymentForm ({
   totalPrice,
   show,
   handleClose,
-  librosCompra
+  librosCompra,
+  deleteCart
 }){
   const initialization = {
     amount: totalPrice,
@@ -39,7 +40,7 @@ export function PaymentForm ({
       const clientApi = new LibraryClientApi();
       clientApi.buyOrder(purchaseData).then( response => {
         console.log("response");
-        // resetCart();
+        deleteCart();
         // handleClose();
     }).catch( error => {
         if(error.response.status === 422){
