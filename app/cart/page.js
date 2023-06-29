@@ -115,30 +115,6 @@ export default function Cart(){
         window.cardPaymentBrickController.unmount(); 
     }
 
-    function resetCart(){
-        const storage = new LocalRepository();
-        storage.clearCart();
-        setErrorMessage("");
-        setBooksCart(EMPTY_CART);
-    }
-
-    function handle422Error(){
-        setErrorMessage(error.response.data.message);
-        setDisableBuyButton(false);
-    }
-
-    function handleAuthError(){
-        const cookieManager = new AuthCookieManager();
-        cookieManager.deleteAuthCookie();
-
-        router.push('/login');
-    }
-
-    function handleOtherErrors(){
-        setErrorMessage(error.response.data.message);
-        setDisableBuyButton(false);
-    }
-
     return (
         <Container className="shopping-cart">
             <Card>
@@ -164,10 +140,6 @@ export default function Cart(){
                             show={showMPModal}
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
-                            resetCart={() => resetCart()}
-                            handle422Error={() => handle422Error()}
-                            handleAuthError={() => handleAuthError()}
-                            handleOtherErrors={() => handleOtherErrors()}
                         />
                     </div>
                     

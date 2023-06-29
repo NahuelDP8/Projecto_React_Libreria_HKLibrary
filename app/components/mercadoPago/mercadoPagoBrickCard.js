@@ -11,53 +11,48 @@ export function PaymentForm ({
   totalPrice,
   show,
   handleClose,
-  librosCompra,
-  resetCart, 
-  handle422Error,
-  handleAuthError,
-  handleOtherErrors
+  librosCompra
 }){
-    const initialization = {
-        amount: totalPrice,
-       };
+  const initialization = {
+    amount: totalPrice,
+  };
 
 
-       useEffect(() => {
-        initMercadoPago('TEST-3a2a4180-ed34-4c24-bce6-65c02cacbc2d');
-      }, []);
+  useEffect(() => {
+    initMercadoPago('TEST-3a2a4180-ed34-4c24-bce6-65c02cacbc2d');
+  }, []);
 
   const onSubmit = async (formData) => {
-        const formattedCart = librosCompra.map( product => {
-            return {
-                id:product.id,
-                cantidad:product.cantidad
-            }
-        });
-
-        const purchaseData = {
-            libros:formattedCart,
-            formData:formData
+    const formattedCart = librosCompra.map( product => {
+        return {
+            id:product.id,
+            cantidad:product.cantidad
         }
-        console.log(purchaseData);
-         const clientApi = new LibraryClientApi();
-         clientApi.buyOrder(purchaseData).then( response => {
-            console.log("response");
-            // resetCart();
-            // handleClose();
-        }).catch( error => {
-            if(error.response.status === 422){
-                console.log("422");
-                // handle422Error();
-            }else if(error.response.status === 419 || error.response.status === 401){
-                console.log("Err auth");
-                //handleAuthError();
-            }else{
-                console.log("otro err");
-                //handleOtherErrors();
-            }
-        });
-    
+    });
 
+    const purchaseData = {
+        libros:formattedCart,
+        formData:formData
+    }
+    
+    console.log(purchaseData);
+      const clientApi = new LibraryClientApi();
+      clientApi.buyOrder(purchaseData).then( response => {
+        console.log("response");
+        // resetCart();
+        // handleClose();
+    }).catch( error => {
+        if(error.response.status === 422){
+            console.log("422");
+            // handle422Error();
+        }else if(error.response.status === 419 || error.response.status === 401){
+            console.log("Err auth");
+            //handleAuthError();
+        }else{
+            console.log("otro err");
+            //handleOtherErrors();
+        }
+    });
   };
 
   const onError = async (error) => {
