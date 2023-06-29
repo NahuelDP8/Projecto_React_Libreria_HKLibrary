@@ -1,7 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 import { initMercadoPago, CardPayment } from '@mercadopago/sdk-react';
-import axios from 'axios';
 import LibraryClientApi from '@/app/services/LibraryClientApi';
 import { Modal } from 'react-bootstrap';
 import LocalRepository from '@/app/services/LocalRepository';
