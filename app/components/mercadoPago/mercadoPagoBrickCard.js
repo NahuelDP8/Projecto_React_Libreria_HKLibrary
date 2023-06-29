@@ -57,10 +57,12 @@ export function PaymentForm ({
 
   const onError = async (error) => {
     // callback llamado para todos los casos de error de Brick
-    console.log("errorBrick: "+error);
+    console.log("errorBrick: ");
+    console.log(error);
   };
 
   const onReady = async () => {
+    console.log("brick listo");
     /*
       Callback llamado cuando Brick está listo.
       Aquí puedes ocultar cargamentos de su sitio, por ejemplo.
