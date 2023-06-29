@@ -48,13 +48,13 @@ export function PaymentForm ({
     }).catch( error => {
         if(error.response.status === 422){
             console.log("422");
-            handleUnproccessableError();
+            handleUnproccessableError(error.response.message);
         }else if(error.response.status === 419 || error.response.status === 401){
             console.log("Err auth");
             handleAuthenticationError();
         }else{
             console.log("otro err");
-            handleGeneralErrors();
+            handleGeneralErrors(error.response.message);
         }
     });
   };

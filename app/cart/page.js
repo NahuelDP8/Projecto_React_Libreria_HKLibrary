@@ -122,8 +122,8 @@ export default function Cart(){
         setBooksCart(EMPTY_CART);
     }
 
-    function handle422Error(){
-        setErrorMessage(error.response.data.message);
+    function handle422Error(message){
+        setErrorMessage(message);
         setDisableBuyButton(false);
     }
 
@@ -134,8 +134,8 @@ export default function Cart(){
         router.push('/login');
     }
 
-    function handleOtherErrors(){
-        setErrorMessage(error.response.data.message);
+    function handleOtherErrors(message){
+        setErrorMessage(message);
         setDisableBuyButton(false);
     }
 
