@@ -8,6 +8,7 @@ import CartRow from "./cartRow";
 import { useRouter } from "next/navigation";
 import LibraryClientApi from "../services/LibraryClientApi";
 import AuthCookieManager from "../services/AuthCookieManager";
+import { PaymentForm } from "../components/mercadoPago/mercadoPagoBrickCard";
 
 export default function Cart(){
     const EMPTY_CLIENT = {
@@ -22,6 +23,7 @@ export default function Cart(){
     const [booksCart, setBooksCart] = useState(EMPTY_CART);
     const [errorMessage, setErrorMessage] = useState("");
     const [disableBuyButton, setDisableBuyButton] = useState(true);
+    const [showMPModal, setShowMPModal]=useState(false);
 
     useEffect(()=>{
         const storage = new LocalRepository();
@@ -108,7 +110,41 @@ export default function Cart(){
         }
     }
 
+    const handleRealizarCompra = (pagoSuccess) => {
+        if(pagoSuccess){
+          const fecha_compra = obtenerFechaActual();
+          const juegosComprados = cart.map((juego) => {
+          const idJuego = juego.id;
+          const precioDelMomento = juego.precio
+          return { idJuego, precioDelMomento };
+          });
+          const compra = {fecha_compra, juegosComprados}
+          const compraApi = new Log_Reg_Buy_Usuarios();
+            compraApi.comprar(compra).then((response) => {
+            console.log('Compra realizada:', response.data);
+            setCompraRealizada(true);
+            setShowPayment(false);
+            clearCart();
+            setTimeout(() => {
+              setShow(false);
+              setCompraRealizada(false); // Restablecer el estado después de un tiempo determinado
+            }, 8000)
+          }).catch((error) => {
+            console.error('Error al realizar la compra:', error);
+          });
+        }else{
+          setShowToast(true);
+          setShowPayment(false);
+          setTimeout(() => {
+            setShowToast(false); // Restablecer el estado después de un tiempo determinado
+          }, 8000)
+        }
+        
+      };
+
+
     function confirmPurchase(){
+        console.log("asd");
         if(booksCart.length > 0){
             setDisableBuyButton(true);
             setErrorMessage("");
@@ -146,7 +182,11 @@ export default function Cart(){
             });
         }
     }
-
+    function closeMPModal(){
+        setShowMPModal(false);
+        window.cardPaymentBrickController.unmount();
+        
+    }
     return (
         <Container className="shopping-cart">
             <Card>
@@ -166,7 +206,14 @@ export default function Cart(){
                     <div className="d-flex justify-content-between align-items-center bg-warning p-2 rounded">
                         <div className="me-auto">TOTAL</div>
                         <div>${calculateTotal()}</div>
-                        <Button variant="success" className="ms-1" onClick={() => confirmPurchase()} disabled={disableBuyButton}>Comprar</Button>
+                        <Button variant="success" className="ms-1" onClick={() => setShowMPModal(true)} disabled={disableBuyButton}>Comprar</Button>
+                        <PaymentForm 
+                            totalPrice = {calculateTotal()}
+                            realizarCompra = {handleRealizarCompra}
+                            show={showMPModal}
+                            handleClose={()=>closeMPModal()}
+                            librosCompra={booksCart}
+                        />
                     </div>
                     
                 </Card.Body>

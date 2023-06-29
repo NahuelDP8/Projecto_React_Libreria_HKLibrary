@@ -4,11 +4,14 @@ import AuthCookieManager from "./AuthCookieManager";
 
 export default class LibraryClientApi{
     constructor(){
-        this.BASE_URL="https://pixel-pioneers-laravel-git-entregapromocion-pixel-pioneer.vercel.app";
+        //this.BASE_URL="https://pixel-pioneers-laravel-git-entregapromocion-pixel-pioneer.vercel.app";
+        this.BASE_URL="http://localhost:8000"
         this.API_URL_BASE="/rest/v1";
 
         this.localRepository = new LocalRepository();
     }
+
+   
 
     getAuthHeader(){
         const token = this.localRepository.getBearerToken();
@@ -69,16 +72,7 @@ export default class LibraryClientApi{
         
     }
 
-    buyOrder(orderData){
-        const END_POINT="/pedidos";
-        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
-
-        return axios.post(url, orderData, this.getAuthHeader()).then( response => {
-            return response;
-        }).catch( error => {
-            throw error;
-        });
-    }
+   
 
     logoutClient(){
         const END_POINT="/logout";
@@ -96,4 +90,27 @@ export default class LibraryClientApi{
             throw error;
         });
     }
+
+    buyOrder(orderData){
+        const END_POINT="/pedidos";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return axios.post(url, orderData, this.getAuthHeader()).then( response => {
+            return response;
+        }).catch( error => {
+            console.log(error);
+            //throw error;
+        });
+    }
+    async mercadoPago(formData){
+        const END_POINT="/verficiarPagoMP";
+        const url = this.BASE_URL+this.API_URL_BASE+END_POINT;
+
+        return axios.post(url, formData, this.getAuthHeader()).then( response => {
+            return response;
+        }).catch( error => {
+            throw error;
+        });
+    }
+
 }

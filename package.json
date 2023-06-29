@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^0.0.12",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "eslint": "8.41.0",
