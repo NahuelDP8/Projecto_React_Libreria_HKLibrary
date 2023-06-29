@@ -48,6 +48,7 @@ export function PaymentForm ({
     }).catch( error => {
         if(error.response.status === 422){
             console.log("422");
+            console.log(error);
             handleUnproccessableError(error.response.message);
         }else if(error.response.status === 419 || error.response.status === 401){
             console.log("Err auth");
