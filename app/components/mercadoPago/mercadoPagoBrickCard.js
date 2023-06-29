@@ -12,7 +12,10 @@ export function PaymentForm ({
   show,
   handleClose,
   librosCompra,
-  deleteCart
+  deleteCart,
+  handleUnproccessableError,
+  handleAuthenticationError,
+  handleGeneralErrors
 }){
   const initialization = {
     amount: totalPrice,
@@ -41,17 +44,17 @@ export function PaymentForm ({
       clientApi.buyOrder(purchaseData).then( response => {
         console.log("response");
         deleteCart();
-        // handleClose();
+        handleClose();
     }).catch( error => {
         if(error.response.status === 422){
             console.log("422");
-            // handle422Error();
+            handleUnproccessableError();
         }else if(error.response.status === 419 || error.response.status === 401){
             console.log("Err auth");
-            //handleAuthError();
+            handleAuthenticationError();
         }else{
             console.log("otro err");
-            //handleOtherErrors();
+            handleGeneralErrors();
         }
     });
   };

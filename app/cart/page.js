@@ -122,6 +122,23 @@ export default function Cart(){
         setBooksCart(EMPTY_CART);
     }
 
+    function handle422Error(){
+        setErrorMessage(error.response.data.message);
+        setDisableBuyButton(false);
+    }
+
+    function handleAuthError(){
+        const cookieManager = new AuthCookieManager();
+        cookieManager.deleteAuthCookie();
+
+        router.push('/login');
+    }
+
+    function handleOtherErrors(){
+        setErrorMessage(error.response.data.message);
+        setDisableBuyButton(false);
+    }
+
     return (
         <Container className="shopping-cart">
             <Card>
@@ -148,6 +165,9 @@ export default function Cart(){
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
                             deleteCart={resetCart}
+                            handleUnproccessableError={handle422Error}
+                            handleAuthenticationError={handleAuthError}
+                            handleGeneralErrors={handleOtherErrors}
                         />
                     </div>
                     
