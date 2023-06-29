@@ -37,14 +37,17 @@ export function PaymentForm ({ totalPrice, realizarCompra,show,handleClose,libro
         }).catch( error => {
             console.log(error);
             if(error.response.status === 422){
+                console.log("422");
                 // setErrorMessage(error.response.data.message);
                 // setDisableBuyButton(false);
             }else if(error.response.status === 419 || error.response.status === 401){
+              console.log("419");
                 // const cookieManager = new AuthCookieManager();
                 // cookieManager.deleteAuthCookie();
 
                 // router.push('/login');
             }else{
+              console.log("else");
                 // setErrorMessage(error.response.data.message);
                 // setDisableBuyButton(false);
             }
