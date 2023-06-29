@@ -165,6 +165,9 @@ export default function Cart(){
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
                             deleteCart={resetCart}
+                            handleUnproccessableError={handle422Error}
+                            handleAuthenticationError={handleAuthError}
+                            handleGeneralErrors={handleOtherErrors}
                         />
                     </div>
                     

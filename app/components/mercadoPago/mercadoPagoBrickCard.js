@@ -11,7 +11,11 @@ export function PaymentForm ({
   totalPrice,
   show,
   handleClose,
-  librosCompra
+  librosCompra,
+  deleteCart,
+  handleUnproccessableError,
+  handleAuthenticationError,
+  handleGeneralErrors
 }){
   const initialization = {
     amount: totalPrice,
@@ -39,18 +43,18 @@ export function PaymentForm ({
       const clientApi = new LibraryClientApi();
       clientApi.buyOrder(purchaseData).then( response => {
         console.log("response");
-        //deleteCart();
-        //handleClose();
+        deleteCart();
+        handleClose();
     }).catch( error => {
         if(error.response.status === 422){
             console.log("422");
-            //handleUnproccessableError();
+            handleUnproccessableError();
         }else if(error.response.status === 419 || error.response.status === 401){
             console.log("Err auth");
-            //handleAuthenticationError();
+            handleAuthenticationError();
         }else{
             console.log("otro err");
-            //handleGeneralErrors();
+            handleGeneralErrors();
         }
     });
   };
