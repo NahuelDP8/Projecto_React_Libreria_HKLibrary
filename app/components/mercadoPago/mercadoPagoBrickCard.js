@@ -44,7 +44,7 @@ export function PaymentForm ({
       clientApi.buyOrder(purchaseData).then( response => {
         console.log("response");
         deleteCart();
-        handleClose();
+        //handleClose();
     }).catch( error => {
         if(error.response.status === 422){
             console.log("422");
