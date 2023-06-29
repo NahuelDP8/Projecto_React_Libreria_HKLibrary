@@ -51,12 +51,13 @@ export function PaymentForm ({
             console.log(error);
             console.log(error.response.data.message);
             handleUnproccessableError(error.response.data.message);
+            handleClose();
         }else if(error.response.status === 419 || error.response.status === 401){
             console.log("Err auth");
             handleAuthenticationError();
         }else{
             console.log("otro err");
-            handleGeneralErrors(error.response.message);
+            handleGeneralErrors("Ocurrio un error. No se pudo concretar el pedido.");
         }
     });
   };
