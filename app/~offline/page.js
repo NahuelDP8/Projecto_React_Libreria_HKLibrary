@@ -1,4 +1,4 @@
-import Head from "next/head";
+'use client';
 import { CustomH1, CustomH3 } from "../components/utils/utils";
 
 export default function StoredBook(){
