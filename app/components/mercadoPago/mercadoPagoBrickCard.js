@@ -28,6 +28,7 @@ export function PaymentForm ({ totalPrice, realizarCompra,show,handleClose,libro
             libros:formattedCart,
             formData:formData
         }
+        console.log(purchaseData);
          const clientApi = new LibraryClientApi();
          clientApi.buyOrder(purchaseData).then( response => {
              const storage = new LocalRepository();
