@@ -41,15 +41,19 @@ export function PaymentForm ({
         console.log(purchaseData);
          const clientApi = new LibraryClientApi();
          clientApi.buyOrder(purchaseData).then( response => {
-            resetCart();
-            handleClose();
+            console.log("response");
+            // resetCart();
+            // handleClose();
         }).catch( error => {
             if(error.response.status === 422){
-                handle422Error();
+                console.log("422");
+                // handle422Error();
             }else if(error.response.status === 419 || error.response.status === 401){
-                handleAuthError();
+                console.log("Err auth");
+                //handleAuthError();
             }else{
-                handleOtherErrors();
+                console.log("otro err");
+                //handleOtherErrors();
             }
         });
     
