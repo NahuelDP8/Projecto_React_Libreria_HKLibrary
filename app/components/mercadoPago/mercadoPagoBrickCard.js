@@ -59,7 +59,7 @@ export function PaymentForm ({
 
   const onError = async (error) => {
     // callback llamado para todos los casos de error de Brick
-    console.log(error);
+    console.log("errorBrick: "+error);
   };
 
   const onReady = async () => {

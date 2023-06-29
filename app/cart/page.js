@@ -164,10 +164,10 @@ export default function Cart(){
                             show={showMPModal}
                             handleClose={()=>closeMPModal()}
                             librosCompra={booksCart}
-                            resetCart={resetCart}
-                            handle422Error={handle422Error}
-                            handleAuthError={handleAuthError}
-                            handleOtherErrors={handleOtherErrors}
+                            resetCart={() => resetCart()}
+                            handle422Error={() => handle422Error()}
+                            handleAuthError={() => handleAuthError()}
+                            handleOtherErrors={() => handleOtherErrors()}
                         />
                     </div>
                     
