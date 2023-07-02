@@ -1,6 +1,6 @@
 class HKLibraryAPI{
     constructor(){
-        this.baseUrl = 'https://pixel-pioneers-laravel-git-etapa2-pixel-pioneer.vercel.app/rest/v1';
+        this.baseUrl = 'https://pixel-pioneers-laravel-git-entregapromocion-pixel-pioneer.vercel.app/rest/v1';
     }
     
 

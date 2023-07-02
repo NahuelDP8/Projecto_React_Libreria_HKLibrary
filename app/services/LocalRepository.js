@@ -1,6 +1,7 @@
 export default class LocalRepository{
     constructor(){
         this.CART_KEY = "cart";
+        this.BEARER_TOKEN_KEY = "auth_token";
     }
 
     getCart() {
@@ -32,5 +33,17 @@ export default class LocalRepository{
 
     clearCart(){
         localStorage.removeItem(this.CART_KEY);
+    }
+
+    storeBearerToken(token){
+        localStorage.setItem(this.BEARER_TOKEN_KEY, token);
+    }
+
+    getBearerToken(){
+        return localStorage.getItem(this.BEARER_TOKEN_KEY);
+    }
+
+    deleteBearerToken(){
+        localStorage.removeItem(this.BEARER_TOKEN_KEY);
     }
 }

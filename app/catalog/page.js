@@ -5,6 +5,7 @@ import HKLibraryAPI from "@/app/services/HKLibraryApi";
 import { Container, Spinner } from "react-bootstrap";
 import BookCardGrid, { BOOKS_NOT_FOUND } from "../components/bookCardGrid/bookCardGrid";
 import SearchBarCatalog from "../components/searchBar/searchBarCatalog";
+import { CustomH1 } from "../components/utils/utils";
 
 export default function Catalog(){
     const [loading, setLoading] = useState(false);
@@ -84,7 +85,7 @@ export default function Catalog(){
     useEffect(() => showBooks(),[]);
     return( 
         <Container className="text-center">
-            <h1>CATALOGO</h1>
+            <CustomH1>CATALOGO</CustomH1>
             <SearchBarCatalog updateBooks={updateBooks} searchText={updateSearchText} updateCriteria={updateCriteria} titleCriteria={criteria} />
             {(loading)?(
                 <Spinner animation="border" variant="light" />
